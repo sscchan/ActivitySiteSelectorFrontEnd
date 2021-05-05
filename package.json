@@ -15,7 +15,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "copy": "react-scripts build && rm -rf ../ActivitySiteSelector/build && cp -r build ../ActivitySiteSelector/"
   },
   "eslintConfig": {
     "extends": [
