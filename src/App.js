@@ -5,7 +5,7 @@ import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import Axios from 'axios';
+import axios from 'axios';
 
 import SiteManagement from './Components/SiteManagement.jsx'
 
@@ -27,9 +27,11 @@ function SiteWeatherOutputs(props) {
             </tr>
           </thead>
           <tbody>
-            <SiteWeatherOutputEntry name="Adelaide" latitude="-32" longitude="55" maxTemperature="55" />
-            <SiteWeatherOutputEntry name="Melbourne" latitude="-32" longitude="55" maxTemperature="45" />
-            <SiteWeatherOutputEntry name="Sydney" latitude="-32" longitude="55" maxTemperature="45" />
+            {
+              props.siteResults.map(function(site, index) {
+                return (<SiteWeatherOutputEntry key={index} name={site.name} latitude={site.latitude} longitude={site.longitude} maxTemperature={site.maxTemperature} />);
+              })
+            }
           </tbody>
         </Table>
       </Row>
@@ -43,7 +45,7 @@ function SiteWeatherOutputEntry(props) {
       <td>{props.name}</td>
       <td>{props.latitude}</td>
       <td>{props.longitude}</td>
-      <td>{props.maxTemperature} degrees</td>
+      <td>{props.maxTemperature}</td>
     </tr>
   );
 }
@@ -85,8 +87,34 @@ class WeatherFilterParameters extends React.Component {
 
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      "siteResults" : []
+    };
+  }
+
   handleLoadResults(maxTemperatureInput) {
-    console.log("Load Results clicked" + maxTemperatureInput);
+    const parentObjectReference = this;
+    const maxTemperature = Number(maxTemperatureInput);
+
+    //Validate input parameters
+    if (isNaN(maxTemperature)) {
+      alert("Maximum Temperature must be a empty value or a numerical value");
+      return
+    }
+
+    axios.get("/sites", {
+      params: {
+        "maxTemperature": maxTemperatureInput
+      }
+    }).then(function(res) {
+      console.log(res.data);
+      parentObjectReference.setState({
+        "siteResults" : res.data
+      });
+    });
   }
 
   render() {
@@ -95,9 +123,9 @@ class App extends React.Component {
         <h2>Site Weather</h2>
         <SiteManagement />
         <br />
-        <WeatherFilterParameters onLoadResults={this.handleLoadResults} />
+        <WeatherFilterParameters onLoadResults={this.handleLoadResults.bind(this)} />
         <br />
-        <SiteWeatherOutputs />
+        <SiteWeatherOutputs siteResults={this.state.siteResults}/>
 
       </Container>
     );

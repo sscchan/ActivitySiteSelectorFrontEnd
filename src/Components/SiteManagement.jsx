@@ -25,17 +25,17 @@ class SiteManagement extends React.Component {
       console.log(`Adding Site: ${name} at (${latitude},${longitude})`);
       
       // Validate Inputs
-      if (name === "") {
+      if (!name || name === "") {
         alert("Name must not be empty");
         return;
       }
 
-      if (latitude === "" || isNaN(latitude) || !((latitude <= 90) && (latitude >= -90))) {
+      if (!latitude || latitude === "" || isNaN(latitude) || !((latitude <= 90) && (latitude >= -90))) {
         alert("Latitude must be a numerical value between 90 and -90");
         return;
       }
 
-      if (longitude === "" || isNaN(longitude) || !((longitude <= 180) && (longitude >= -180))) {
+      if (!longitude || longitude === "" || isNaN(longitude) || !((longitude <= 180) && (longitude >= -180))) {
         alert("Longitude must be a numerical value between 180 and -180");
         return;
       }
