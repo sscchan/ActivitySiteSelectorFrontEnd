@@ -1,16 +1,19 @@
-
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Axios from 'axios';
 
-function SiteWeatherOutputs(params) {
+import SiteManagement from './Components/SiteManagement.jsx'
+
+function SiteWeatherOutputs(props) {
   return (
     <Container>
       <Row>
-        <h2>Temperature Results</h2>
+        <h2>Results</h2>
       </Row>
 
       <Row>
@@ -34,79 +37,71 @@ function SiteWeatherOutputs(params) {
   )
 }
 
-function WeatherFilterParameters(params) {
-  return (
-    <Container>
-      <Row>
-        <h3>Weather Filter Parameters</h3>
-      </Row>
-      <Row>
-        <Col>
-          <Form.Group>
-            <Form.Label>Max Temperature</Form.Label>
-            <Form.Control placeholder="None" id="maxTemperatureInput" />
-          </Form.Group>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Button>Load Results</Button>
-        </Col>
-      </Row>
-    </Container>
-  )
-}
-function SiteWeatherOutputEntry(params) {
+function SiteWeatherOutputEntry(props) {
   return (
     <tr>
-      <td>{params.name}</td>
-      <td>{params.latitude}</td>
-      <td>{params.longitude}</td>
-      <td>{params.maxTemperature} degrees</td>
+      <td>{props.name}</td>
+      <td>{props.latitude}</td>
+      <td>{props.longitude}</td>
+      <td>{props.maxTemperature} degrees</td>
     </tr>
   );
 }
 
-function SiteManagement(params) {
-  return (
-    <Container>
-      <Row>
-        <h3>Add / Remove Site</h3>
-      </Row>
+class WeatherFilterParameters extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      maxTemperatureInputValue: ""
+    }
+  }
 
-      <Form>
+  render() {
+    return (
+      <Container>
+        <Row>
+          <h3>Weather Filter Parameters</h3>
+        </Row>
         <Row>
           <Col>
-            <Form.Control placeholder="Name" id="siteNameInput" />
-          </Col>
-          <Col>
-            <Form.Control placeholder="Latitude" id="siteLatitudeInput" />
-          </Col>
-          <Col>
-            <Form.Control placeholder="Longitude" id="siteLongitudeInput" />
-          </Col>
-          <Col>
-            <Button>Add</Button>&nbsp;
-            <Button>Remove</Button>
+            <Form.Group>
+              <Form.Label>Max Temperature</Form.Label>
+              <Form.Control
+                placeholder="None"
+                value={this.state.maxTemperatureInputValue} 
+                onChange={event => this.setState({maxTemperatureInputValue: event.target.value})}/>
+            </Form.Group>
           </Col>
         </Row>
-      </Form>
-    </Container>
-  )
+        <Row>
+          <Col>
+            <Button onClick={() => {this.props.onLoadResults(this.state.maxTemperatureInputValue)}}>Load Results</Button>
+          </Col>
+        </Row>
+      </Container>
+    )
+  }
 }
 
-function App() {
-  return (
-    <Container className="App">
-      <h2>Site Weather</h2>
-      <SiteManagement />
-      <br />
-      <WeatherFilterParameters />
-      <br />
-      <SiteWeatherOutputs />
 
-    </Container>
-  );
+class App extends React.Component {
+  handleLoadResults(maxTemperatureInput) {
+    console.log("Load Results clicked" + maxTemperatureInput);
+  }
+
+  render() {
+    return (
+      <Container className="App">
+        <h2>Site Weather</h2>
+        <SiteManagement />
+        <br />
+        <WeatherFilterParameters onLoadResults={this.handleLoadResults} />
+        <br />
+        <SiteWeatherOutputs />
+
+      </Container>
+    );
+  }
 }
 
 export default App;
