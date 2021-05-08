@@ -1,10 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Table from 'react-bootstrap/Table';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 import SiteManagement from './Components/SiteManagement.jsx';
