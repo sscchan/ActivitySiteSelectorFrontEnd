@@ -17,7 +17,6 @@ class SiteManagement extends React.Component {
     }
   
     handleAddOnClick() {
-      const parentObjectReference = this;
       const name = this.state.siteNameInputValue;
       const latitude = Number(this.state.siteLatitudeInputValue);
       const longitude = Number(this.state.siteLongitudeInputValue);
@@ -45,16 +44,15 @@ class SiteManagement extends React.Component {
         "longitude": longitude
       }).then(function (res) {
         console.log(res);
-        parentObjectReference.setState({
+        this.setState({
           siteNameInputValue: "",
           siteLatitudeInputValue: "",
           siteLongitudeInputValue: ""
         })
-      })
+      }.bind(this))
     }
   
     handleRemoveOnClick() {
-      const parentObjectReference = this;
       const name = this.state.siteNameInputValue
       console.log(`Removing Site: ${name}`);
 
@@ -66,12 +64,12 @@ class SiteManagement extends React.Component {
 
       axios.delete(`sites/${encodeURIComponent(name)}`).then(function(res) {
         console.log(res);
-        parentObjectReference.setState({
+        this.setState({
           siteNameInputValue: "",
           siteLatitudeInputValue: "",
           siteLongitudeInputValue: ""
         })
-      })
+      }.bind(this))
 
     }
   
