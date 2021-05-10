@@ -16,12 +16,20 @@ function SiteWeatherOutputs(props) {
                     <th>Latitude</th>
                     <th>Longitude</th>
                     <th>Max Temperature</th>
+                    <th>Forecast Date</th> 
                   </tr>
                 </thead>
                 <tbody>
                   {
                     props.siteResults.map(function (site, index) {
-                      return (<SiteWeatherOutputEntry key={index} name={site.name} latitude={site.latitude} longitude={site.longitude} maxTemperature={site.maxTemperature} />);
+                      return (<SiteWeatherOutputEntry 
+                        key={index} 
+                        name={site.name} 
+                        latitude={site.latitude} 
+                        longitude={site.longitude} 
+                        maxTemperature={site.maxTemperature}
+                        forecastTime={site.forecastTime}
+                        />);
                     })
                   }
                 </tbody>
@@ -40,6 +48,7 @@ function SiteWeatherOutputEntry(props) {
       <td>{props.latitude}</td>
       <td>{props.longitude}</td>
       <td>{props.maxTemperature}</td>
+      <td>{(new Date(props.forecastTime * 1000)).toLocaleDateString()}</td>
     </tr>
   );
 }
