@@ -5,30 +5,32 @@ import Row from 'react-bootstrap/Row';
 function SiteWeatherOutputs(props) {
   return (
     <Container>
-      <Row>
-        <h2>Results</h2>
-      </Row>
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Results</h2>
 
-      <Row>
-        <Table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Latitude</th>
-              <th>Longitude</th>
-              <th>Max Temperature</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              props.siteResults.map(function(site, index) {
-                return (<SiteWeatherOutputEntry key={index} name={site.name} latitude={site.latitude} longitude={site.longitude} maxTemperature={site.maxTemperature} />);
-              })
-            }
-          </tbody>
-        </Table>
-      </Row>
-    </Container>
+          <div>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Max Temperature</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    props.siteResults.map(function (site, index) {
+                      return (<SiteWeatherOutputEntry key={index} name={site.name} latitude={site.latitude} longitude={site.longitude} maxTemperature={site.maxTemperature} />);
+                    })
+                  }
+                </tbody>
+              </Table>
+          </div>
+        </div>
+      </div >
+    </Container >
   )
 }
 

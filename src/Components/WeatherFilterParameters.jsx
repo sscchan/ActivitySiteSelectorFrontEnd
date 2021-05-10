@@ -16,25 +16,29 @@ class WeatherFilterParameters extends React.Component {
   render() {
     return (
       <Container>
-        <Row>
-          <h3>Weather Filter Parameters</h3>
-        </Row>
-        <Row>
-          <Col>
-            <Form.Group>
-              <Form.Label>Max Temperature</Form.Label>
-              <Form.Control
-                placeholder="None"
-                value={this.state.maxTemperatureInputValue} 
-                onChange={event => this.setState({maxTemperatureInputValue: event.target.value})}/>
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button onClick={() => {this.props.onLoadResults(this.state.maxTemperatureInputValue)}}>Load Results</Button>
-          </Col>
-        </Row>
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Weather Filter Parameters</h3>
+
+            <Row>
+              <Col>
+                <Form.Group>
+                  <Form.Label>Max Temperature</Form.Label>
+                  <Form.Control
+                    placeholder="None"
+                    value={this.state.maxTemperatureInputValue}
+                    onChange={event => this.setState({ maxTemperatureInputValue: event.target.value })} />
+                </Form.Group>
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col>
+                <Button onClick={() => { this.props.onLoadResults(this.state.maxTemperatureInputValue) }}>Load Results</Button>
+              </Col>
+            </Row>
+          </div>
+        </div>
       </Container>
     )
   }

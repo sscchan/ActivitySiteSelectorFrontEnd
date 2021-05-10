@@ -76,36 +76,37 @@ class SiteManagement extends React.Component {
     render() {
       return (
         <Container>
-          <Row>
-            <h3>Add / Remove Site</h3>
-          </Row>
-  
-          <Form>
-            <Row>
-              <Col>
-                <Form.Control
-                  placeholder="Name"
-                  value={this.state.siteNameInputValue} 
-                  onChange={event => this.setState({ siteNameInputValue: event.target.value })} />
-              </Col>
-              <Col>
-                <Form.Control
-                  placeholder="Latitude"
-                  value={this.state.siteLatitudeInputValue}
-                  onChange={event => this.setState({ siteLatitudeInputValue: event.target.value })} />
-              </Col>
-              <Col>
-                <Form.Control 
-                  placeholder="Longitude"
-                  value={this.state.siteLongitudeInputValue}
-                  onChange={event => this.setState({ siteLongitudeInputValue: event.target.value })} />
-              </Col>
-              <Col>
-                <Button onClick={this.handleAddOnClick.bind(this)}>Add</Button>&nbsp;
+          <div class = "card">
+            <div class = "card-body">
+            <h3 class="card-title">Add / Remove Site</h3>
+              <Form>
+                <Row>
+                  <Col>
+                    <Form.Control
+                      placeholder="Name"
+                      value={this.state.siteNameInputValue}
+                      onChange={event => this.setState({ siteNameInputValue: event.target.value })} />
+                  </Col>
+                  <Col>
+                    <Form.Control
+                      placeholder="Latitude"
+                      value={this.state.siteLatitudeInputValue}
+                      onChange={event => this.setState({ siteLatitudeInputValue: event.target.value })} />
+                  </Col>
+                  <Col>
+                    <Form.Control
+                      placeholder="Longitude"
+                      value={this.state.siteLongitudeInputValue}
+                      onChange={event => this.setState({ siteLongitudeInputValue: event.target.value })} />
+                  </Col>
+                  <Col>
+                    <Button onClick={this.handleAddOnClick.bind(this)}>Add</Button>&nbsp;
               <Button onClick={this.handleRemoveOnClick.bind(this)}>Remove</Button>
-              </Col>
-            </Row>
-          </Form>
+                  </Col>
+                </Row>
+              </Form>
+            </div>
+          </div>
         </Container>
       )
     }

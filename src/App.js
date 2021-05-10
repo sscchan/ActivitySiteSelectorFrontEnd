@@ -40,13 +40,17 @@ class App extends React.Component {
   render() {
     return (
       <Container className="App">
-        <h2>Site Weather</h2>
+        <div class="jumbotron">
+          <div class="container">
+            <h1 class="display-4">Site Selector</h1>
+            <p class="lead">Select activity site by weather filters.</p>
+          </div>
+        </div>
         <SiteManagement />
         <br />
         <WeatherFilterParameters onLoadResults={this.handleLoadResults.bind(this)} />
         <br />
-        <SiteWeatherOutputs siteResults={this.state.siteResults}/>
-
+        <SiteWeatherOutputs siteResults={this.state.siteResults} />
       </Container>
     );
   }
