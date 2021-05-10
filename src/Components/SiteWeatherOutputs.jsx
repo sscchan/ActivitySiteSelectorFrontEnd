@@ -1,6 +1,5 @@
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
-import Row from 'react-bootstrap/Row';
 
 function SiteWeatherOutputs(props) {
   return (
